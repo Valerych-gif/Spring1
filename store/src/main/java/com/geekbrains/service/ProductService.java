@@ -2,6 +2,8 @@ package com.geekbrains.service;
 
 import com.geekbrains.entites.Product;
 import com.geekbrains.repositories.ProductRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,12 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    public void setStudentsRepository(ProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public ProductService() {
+
     }
 
     public Product getProductById(int id) {
@@ -21,6 +27,7 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts(){
+//        productRepository.pullProductsFromDB();
         return productRepository.getProducts();
     }
 
@@ -28,7 +35,7 @@ public class ProductService {
         productRepository.addProduct(product);
     }
 
-    public ProductService() {
-
+    public void deleteProductById(int id) {
+        productRepository.deleteOneById(id);
     }
 }

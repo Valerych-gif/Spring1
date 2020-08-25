@@ -1,6 +1,6 @@
 package com.geekbrains.repositories;
 
-import com.geekbrains.entites.Product;
+import com.geekbrains.entites.Customer;
 import com.geekbrains.service.MySessionFactory;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ProductRepository {
+public class CustomerRepository {
 
     private Session session;
 
-    public ProductRepository() {
-
+    public CustomerRepository() {
     }
 
     private void getSession() {
@@ -22,34 +21,34 @@ public class ProductRepository {
                 .getCurrentSession();
     }
 
-    public Product findOneById(int id) {
+    public Customer findOneById(int id) {
         getSession();
         session.beginTransaction();
-        Product product = session.get(Product.class, id);
+        Customer customer = session.get(Customer.class, id);
         session.getTransaction().commit();
-        return product;
+        return customer;
     }
 
-    public void addProduct(Product product) {
+    public List<Customer> getCustomers() {
         getSession();
         session.beginTransaction();
-        session.save(product);
+        List<Customer> customers = session.createQuery("from Customer").getResultList();
+        session.getTransaction().commit();
+        return customers;
+    }
+
+    public void addCustomer(Customer customer) {
+        getSession();
+        session.beginTransaction();
+        session.save(customer);
         session.getTransaction().commit();
     }
 
     public void deleteOneById(int id) {
-        Product product = findOneById(id);
+        Customer customer = findOneById(id);
         getSession();
         session.beginTransaction();
-        session.delete(product);
+        session.delete(customer);
         session.getTransaction().commit();
-    }
-
-    public List<Product> getProducts() {
-        getSession();
-        session.beginTransaction();
-        List<Product> products = session.createQuery("from Product").getResultList();
-        session.getTransaction().commit();
-        return products;
     }
 }

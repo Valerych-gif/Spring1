@@ -8,11 +8,10 @@
     </head>
 
     <body>
-        <h1>${product.title}</h1>
-        <div>Cost: ${product.cost}</div>
+        <h1>${customer.name}</h1>
         <ol>
-            <c:forEach var="item" items="${customers}">
-                <li><a href = "/home/customer/${item.id}/">${item.name}</a></li>
+            <c:forEach var="item" items="${products}">
+                <li><a href = "/home/product/${item.id}/">${item.title}</a></li>
             </c:forEach>
         </ol>
         <div><a href="/home/">Home page</a></div>
