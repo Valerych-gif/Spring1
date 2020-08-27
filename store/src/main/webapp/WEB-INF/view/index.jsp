@@ -12,11 +12,12 @@
 
         <ol>
             <c:forEach var="item" items="${products}">
-                <li><a href = "/home/product/${item.id}/"> ${item.title}</a></li>
+                <li><a href = "/home/product/${item.id}/"> ${item.title}</a> (<a href = "/home/product/delete/${item.id}/">delete</a>)</li>
             </c:forEach>
         </ol>
 
         <a href="/home/addproduct/">Add product</a>
+        <a href="/home/customers/">Customers</a>
 
     </body>
 </html>

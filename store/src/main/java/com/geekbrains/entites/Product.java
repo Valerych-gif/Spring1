@@ -1,23 +1,33 @@
 package com.geekbrains.entites;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "product_tbl")
 public class Product {
 
-    private static int nextId=0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "title_fld")
     private String title;
+
+    @Column(name = "cost_fld")
     private int cost;
 
-    public Product(String title, int cost) {
-        this.id = nextId++;
-        this.title = title;
-        this.cost = cost;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customerproduct_tbl",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private List<Customer> customers;
+
+    public Product() {
     }
-
-    public Product(){
-
-    }
-
-
 
     public int getId() {
         return id;
@@ -37,5 +47,13 @@ public class Product {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 }
