@@ -37,6 +37,13 @@
                     (<a th:href="@{'product/delete/' + ${product.id}}" th:text="delete"/>)
                 </li>
             </ol>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li th:each="pagelink:${pagelinks}" th:class="'page-item ' + ${pagelink.activeClass}">
+                        <a th:href="@{'/?page=' + ${pagelink.pageNumber}}" th:text="${pagelink.pageNumber}" class="page-link"/>
+                    </li>
+                </ul>
+            </nav>
             <a href="/home/setup" class="btn  btn-secondary">Setup</a>
         </div>
     </div>

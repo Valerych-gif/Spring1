@@ -3,6 +3,9 @@ package com.valerych.services;
 import com.valerych.entites.Product;
 import com.valerych.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +27,13 @@ public class ProductService {
         return productRepository.getOne(id);
     }
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProduct(){
         return productRepository.findAll();
+    }
+
+    public Page<Product> getAllProductsByPage(int start, int productOnPage){
+        Pageable pageable = PageRequest.of(start, productOnPage);
+        return productRepository.findAll(pageable);
     }
 
     public void addProduct(Product product){
