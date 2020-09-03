@@ -5,9 +5,7 @@ import com.valerych.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/product")
@@ -31,6 +29,19 @@ public class ProductController {
     String productDelete(Model model, @PathVariable("id") Long id) {
         Product product = productService.getProductById(id);
         productService.deleteProduct(product);
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    String productEditForm(Model model, @PathVariable("id") Long id) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    String productEdit(@RequestParam("id") Long id, @RequestParam("title") String title, @RequestParam("cost") int cost){
+        productService.updateProduct(id, title, cost);
         return "redirect:/";
     }
 }
