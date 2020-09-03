@@ -44,4 +44,15 @@ public class ProductController {
         productService.updateProduct(id, title, cost);
         return "redirect:/";
     }
+
+    @RequestMapping("/add")
+    String productAddForm(){
+        return "add";
+    }
+
+    @PostMapping("/add")
+    String productAdd(@RequestParam("title") String title, @RequestParam("cost") int cost){
+        productService.addProduct(new Product(title, cost));
+        return "redirect:/";
+    }
 }
