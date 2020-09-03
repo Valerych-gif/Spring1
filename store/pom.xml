@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.geekbrains</groupId>
-    <artifactId>geekspring</artifactId>
+    <artifactId>store</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
