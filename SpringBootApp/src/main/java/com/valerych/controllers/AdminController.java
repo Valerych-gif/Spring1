@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping ("/setup")
-public class SetupController {
+@RequestMapping ("/admindashboard")
+public class AdminController {
 
     @Autowired
     private ProductService productService;
@@ -19,7 +19,7 @@ public class SetupController {
 
     @GetMapping("")
     String setUp() {
-        return "setup";
+        return "admindashboard";
     }
 
     @GetMapping("/setupstore")
