@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment = "navBar(activeTab)">
+    <a class="navbar-brand" href="#">Store</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link" th:classappend="${activeTab} == 'index' ? 'active' : ''" href="/home">Home</a>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link" th:classappend="${activeTab} == 'admindashboard' ? 'active' : ''" href="/home/admindashboard">Admin Dashboard</a>
+            <a class="nav-link"  href="/home/login">Log in</a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

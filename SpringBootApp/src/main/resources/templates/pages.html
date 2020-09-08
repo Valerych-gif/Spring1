@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<nav aria-label="..." th:fragment="pages(thisPageNumber)">
+    <ul class="pagination">
+        <li th:each="pagelink:${pagelinks}" class="page-item"  th:classappend="${thisPageNumber} == ${pagelink} ? 'active' : ''">
+            <a th:href="@{'/?page=' + ${pagelink}}" th:text="${pagelink}" class="page-link"/>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

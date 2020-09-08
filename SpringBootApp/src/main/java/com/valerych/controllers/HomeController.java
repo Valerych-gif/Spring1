@@ -16,23 +16,6 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    class PageLink{
-        private int pageNumber;
-        private String activeClass;
-
-        public PageLink(int pageNumber, String activeClass) {
-            this.pageNumber = pageNumber;
-            this.activeClass = activeClass;
-        }
-
-        public int getPageNumber() {
-            return pageNumber;
-        }
-
-        public String getActiveClass() {
-            return activeClass;
-        }
-    }
     private final static int PRODUCT_ON_PAGE = 5;
 
     @Autowired
@@ -45,18 +28,15 @@ public class HomeController {
     @GetMapping("/")
     String homePage(Model model, @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
         int productCount = productService.getAllProduct().size();
-        int pagesCount = productCount%PRODUCT_ON_PAGE==0?productCount/PRODUCT_ON_PAGE:productCount/PRODUCT_ON_PAGE+1;
-        List<PageLink> pageLinks = new ArrayList<>();
+        int pagesCount = productCount % PRODUCT_ON_PAGE == 0 ? productCount / PRODUCT_ON_PAGE : productCount / PRODUCT_ON_PAGE + 1;
+        List<Integer> pageLinks = new ArrayList<>();
         for (int i = 0; i < pagesCount; i++) {
-            if (i==page) {
-                pageLinks.add(new PageLink(i, "active"));
-            } else{
-                pageLinks.add(new PageLink(i, ""));
-            }
+            pageLinks.add(i);
         }
         Page<Product> products = productService.getAllProductsByPage(page, PRODUCT_ON_PAGE);
         model.addAttribute("products", products);
         model.addAttribute("pagelinks", pageLinks);
+        model.addAttribute("currentPage", page);
         return "index";
     }
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<table class="table"  th:fragment="productList">
+    <thead class="thead-light">
+    <tr>
+        <th>Title</th>
+        <th>Cost</th>
+        <th sec:authorize="hasRole('ADMIN')">Edit Product</th>
+        <th sec:authorize="hasRole('ADMIN')">Delete Product</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td><a th:href="@{'/product/' + ${product.id}}" th:text="${product.title}"/></td>
+        <td th:text="'Cost: ' + ${product.cost}"/>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{'product/edit/' + ${product.id}}" th:text="edit" class="btn btn-secondary"/></td>
+        <td sec:authorize="hasRole('ADMIN')"><a th:href="@{'product/delete/' + ${product.id}}" th:text="delete" class="btn btn-danger"/></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
