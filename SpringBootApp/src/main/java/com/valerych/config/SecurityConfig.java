@@ -19,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admindashboard/**").hasRole("ADMIN")
                 .and()
+                .csrf().disable()
                 .formLogin()
                 .and()
                 .logout().logoutSuccessUrl("/");
