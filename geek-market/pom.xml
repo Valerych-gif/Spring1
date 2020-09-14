@@ -111,11 +111,11 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.1</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/geek_market?useSSL=false</url>
+                    <url>jdbc:mysql://localhost:3306/geek-market?useSSL=false</url>
                     <user>geek</user>
                     <password>geek</password>
                     <schemas>
-                        <schema>geek_market</schema>
+                        <schema>geek-market</schema>
                     </schemas>
                 </configuration>
             </plugin>
