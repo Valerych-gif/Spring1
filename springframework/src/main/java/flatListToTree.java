@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class flatListToTree {
     static class Node {
@@ -63,15 +64,14 @@ public class flatListToTree {
             for (Node treeNode : tree) {
                 if (treeNode.getNodeNumber().equals(nodeParentNumber)) {
                     treeNode.addChild(flatNode);
-                    toRemove.add(tree.indexOf(treeNode));
+                    toRemove.add(tree.indexOf(flatNode));
                 }
             }
         }
 
         for (Integer index : toRemove) {
-            tree.remove(index);
+            tree.set(index, null);
         }
-        tree.get(1).printChildren();
-        tree.get(2).printChildren();
+        tree.removeIf(Objects::isNull);
     }
 }
